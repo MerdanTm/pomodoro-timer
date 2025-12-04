@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍅 Pomodoro Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+    <!-- Freemium Banner -->
+    <div class="freemium-banner" id="freemiumBanner">
+        <span class="banner-text">🍅 Enjoying Pomodoro Timer? </span>
+        <a href="https://buymeacoffee.com/ekopjordan" target="_blank" class="banner-btn">☕ Support Us</a>
+        <button class="banner-close" id="bannerClose">✕</button>
+    </div>
+
+    <div class="container">
+        <!-- Background decoration -->
+        <div class="bg-decoration">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>
+
+        <!-- Main content -->
+        <div class="timer-card">
+            <!-- Theme Toggle (Top Left) -->
+            <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                <span class="theme-icon sun">☀️</span>
+                <span class="theme-icon moon">🌙</span>
+            </button>
+
+            <!-- Language Selector (Top Right) -->
+            <div class="language-dropdown" id="languageDropdown">
+                <button class="lang-current" id="langCurrent" title="Select Language">
+                    <span class="current-flag" id="currentFlag">🇬🇧</span>
+                    <span class="lang-arrow">▼</span>
+                </button>
+                <div class="lang-options" id="langOptions">
+                    <button class="lang-option active" data-lang="en" title="English">
+                        <span class="flag">🇬🇧</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru" title="Русский">
+                        <span class="flag">🇷🇺</span>
+                        <span class="lang-name">Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr" title="Türkçe">
+                        <span class="flag">🇹🇷</span>
+                        <span class="lang-name">Türkçe</span>
+                    </button>
+                    <button class="lang-option" data-lang="fr" title="Français">
+                        <span class="flag">🇫🇷</span>
+                        <span class="lang-name">Français</span>
+                    </button>
+                    <button class="lang-option" data-lang="zh" title="中文">
+                        <span class="flag">🇨🇳</span>
+                        <span class="lang-name">中文</span>
+                    </button>
+                </div>
+            </div>
+
+            <h1 class="logo">🍅 Pomodoro</h1>
+            
+            <!-- Mode tabs -->
+            <div class="mode-tabs">
+                <button class="mode-btn active" data-mode="work" data-time="45" data-i18n="work">
+                    Çalışma
+                </button>
+                <button class="mode-btn" data-mode="shortBreak" data-time="5" data-i18n="shortBreak">
+                    Kısa Mola
+                </button>
+                <button class="mode-btn" data-mode="longBreak" data-time="15" data-i18n="longBreak">
+                    Uzun Mola
+                </button>
+            </div>
+
+            <!-- Settings Toggle -->
+            <button class="settings-toggle" id="settingsToggle" data-i18n="settingsToggle">
+                ⚙️ Süreleri Ayarla
+            </button>
+
+            <!-- Settings Panel -->
+            <div class="settings-panel" id="settingsPanel">
+                <div class="setting-item">
+                    <label for="workTime" data-i18n="workTimeLabel">🎯 Çalışma Süresi</label>
+                    <div class="time-input-group">
+                        <button class="time-btn minus" data-target="workTime">−</button>
+                        <input type="number" id="workTime" value="45" min="1" max="120">
+                        <button class="time-btn plus" data-target="workTime">+</button>
+                        <span class="time-unit" data-i18n="minutes">dk</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="shortBreakTime" data-i18n="shortBreakLabel">☕ Kısa Mola</label>
+                    <div class="time-input-group">
+                        <button class="time-btn minus" data-target="shortBreakTime">−</button>
+                        <input type="number" id="shortBreakTime" value="5" min="1" max="30">
+                        <button class="time-btn plus" data-target="shortBreakTime">+</button>
+                        <span class="time-unit" data-i18n="minutes">dk</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label for="longBreakTime" data-i18n="longBreakLabel">🌴 Uzun Mola</label>
+                    <div class="time-input-group">
+                        <button class="time-btn minus" data-target="longBreakTime">−</button>
+                        <input type="number" id="longBreakTime" value="15" min="1" max="60">
+                        <button class="time-btn plus" data-target="longBreakTime">+</button>
+                        <span class="time-unit" data-i18n="minutes">dk</span>
+                    </div>
+                </div>
+                
+                <!-- Sound Settings -->
+                <div class="setting-divider"></div>
+                <h4 class="setting-section-title" data-i18n="soundSettings">🔔 Sound Settings</h4>
+                
+                <div class="setting-item">
+                    <label data-i18n="soundEnabled">🔊 Sound Notifications</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundEnabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <label data-i18n="voiceEnabled">🗣️ Voice Announcements</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="voiceEnabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <label data-i18n="soundTypeLabel">🎵 Notification Sound</label>
+                    <select id="soundType" class="sound-select">
+                        <option value="chime" data-i18n-option="soundChime">Chime</option>
+                        <option value="bell" data-i18n-option="soundBell">Bell</option>
+                        <option value="digital" data-i18n-option="soundDigital">Digital</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label data-i18n="volumeLabel">🎚️ Volume</label>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="70" class="volume-slider">
+                </div>
+                
+                <!-- Test Sound Button -->
+                <button class="test-sound-btn" id="testSoundBtn">🔊 Test Sound</button>
+                
+                <button class="save-settings-btn" id="saveSettingsBtn" data-i18n="saveBtn">💾 Kaydet</button>
+            </div>
+
+            <!-- Timer display -->
+            <div class="timer-display">
+                <div class="timer-ring">
+                    <svg class="progress-ring" width="280" height="280">
+                        <circle 
+                            class="progress-ring-bg" 
+                            cx="140" 
+                            cy="140" 
+                            r="130"
+                        />
+                        <circle 
+                            class="progress-ring-circle" 
+                            cx="140" 
+                            cy="140" 
+                            r="130"
+                        />
+                    </svg>
+                    <div class="timer-text">
+                        <span id="minutes">45</span>
+                        <span class="separator">:</span>
+                        <span id="seconds">00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control buttons -->
+            <div class="controls">
+                <button class="control-btn" id="resetBtn" title="Sıfırla">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
+                </button>
+                <button class="control-btn primary" id="startBtn">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+                    </svg>
+                </button>
+                <button class="control-btn" id="skipBtn" title="Geç">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 4l10 8-10 8V4z"/>
+                        <line x1="19" y1="5" x2="19" y2="19"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Warning indicator -->
+            <div class="warning-indicator" id="warningIndicator">
+                <span class="warning-icon">⚠️</span>
+                <span class="warning-text" id="warningText" data-i18n="timeWarning">Az kaldı!</span>
+            </div>
+
+            <!-- Session counter -->
+            <div class="session-info">
+                <div class="session-counter">
+                    <span class="session-label" data-i18n="completed">Tamamlanan</span>
+                    <div class="pomodoro-dots" id="pomodoroDots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="session-count">#<span id="sessionCount">1</span></span>
+                </div>
+            </div>
+
+            <!-- Task input -->
+            <div class="task-section">
+                <input 
+                    type="text" 
+                    id="taskInput" 
+                    class="task-input" 
+                    data-i18n-placeholder="taskPlaceholder"
+                    placeholder="Şu an ne üzerinde çalışıyorsun?"
+                    maxlength="50"
+                >
+                <div class="current-task" id="currentTask"></div>
+            </div>
+        </div>
+
+        <!-- Stats panel -->
+        <div class="stats-panel">
+            <h3 data-i18n="statsTitle">📊 Bugünkü İstatistikler</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalPomodoros">0</span>
+                    <span class="stat-label">Pomodoro</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalMinutes">0</span>
+                    <span class="stat-label" data-i18n="minutesLabel">Dakika</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalHours">0.0</span>
+                    <span class="stat-label" data-i18n="hoursLabel">Saat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy Me a Coffee Button -->
+        <div class="support-section">
+            <div class="bmc-widget-container">
+                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ekopjordan" data-color="#FF5F5F" data-emoji=""  data-font="Comic" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-i18n="footerText">🍅 Work more efficiently with Pomodoro Technique!</p>
+            <p class="tip" data-i18n="footerTip">💡 4 pomodoros = 1 long break</p>
+        </footer>
+    </div>
+
+    <!-- Audio for notification -->
+    <audio id="alarmSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleShPg9markup3" type="audio/wav">
+    </audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
